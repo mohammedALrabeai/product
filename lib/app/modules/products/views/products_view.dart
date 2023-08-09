@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:product/app/modules/products/widgets/product_item_widget.dart';
+import 'package:product/app/routes/app_pages.dart';
 
 import '../controllers/products_controller.dart';
 import '../widgets/cat_widget.dart';
@@ -21,16 +22,21 @@ class ProductsView extends GetView<ProductsController> {
         centerTitle: true,
         // toolbarHeight: 70,
         actions: [
-          Card(
-            child: SizedBox(
-              width: 50,
-              child: Icon(
-                Icons.add,
-                color: Colors.black,
+          InkWell(
+            onTap: (){
+              Get.toNamed(Routes.ADD_PRODUCT)!.then((value) => controller.getProdduct());
+            },
+            child: const Card(
+              child: SizedBox(
+                width: 50,
+                child: Icon(
+                  Icons.add,
+                  color: Colors.black,
+                ),
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 20,
           )
         ],
@@ -39,8 +45,8 @@ class ProductsView extends GetView<ProductsController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 18.0),
+            const Padding(
+              padding: EdgeInsets.only(right: 18.0),
               child: Text("التصنيفات",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),),
             ),
             SingleChildScrollView(
@@ -66,7 +72,7 @@ class ProductsView extends GetView<ProductsController> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18.0,vertical: 15),
                   child: Row(
-                    children: [
+                    children: const [
                       Icon(
                         Icons.category,
                         color: Colors.red,
@@ -82,14 +88,16 @@ class ProductsView extends GetView<ProductsController> {
                 ),
               ],
             ),
-            ListView.builder(
-                shrinkWrap: true,
-                itemExtent: 105.0,
-                itemCount: controller.productList.length,
-                itemBuilder: (context, index) {
-                  var item = controller.productList.elementAt(index);
-                  return ProductItemWidget(item: item);
-                })
+            Obx(
+                ()=> ListView.builder(
+                  shrinkWrap: true,
+                  itemExtent: 105.0,
+                  itemCount: controller.productList.length,
+                  itemBuilder: (context, index) {
+                    var item = controller.productList.elementAt(index);
+                    return ProductItemWidget(item: item);
+                  }),
+            )
           ],
         ),
       ),

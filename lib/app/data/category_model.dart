@@ -6,4 +6,6 @@ class Category {
 
 
   Category({this.id, this.title, this.img});
+
+  get hasData => id!=null;
 }

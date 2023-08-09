@@ -15,6 +15,7 @@ class CategoryWidget extends GetView<ProductsController> {
         onTap: (){
           controller.selectedCategory.value=category;
           controller.selectedCategory.refresh();
+          controller.filter();
         },
         child: Container(
           height: 114,

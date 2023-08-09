@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:product/app/data/product_model.dart';
 
@@ -14,8 +16,8 @@ class ProductItemWidget extends StatelessWidget {
       visualDensity: const VisualDensity(vertical: 4, horizontal: 4),
       leading: SizedBox(
           height: 115,
-          child: Image.asset(
-            item.img!,
+          child: Image.file(
+            File(item.img!),
             height: 115,
             width: 100,
             fit: BoxFit.fill,
